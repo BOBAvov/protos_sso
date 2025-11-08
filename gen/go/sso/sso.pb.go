@@ -4,7 +4,7 @@
 // 	protoc        v6.33.0
 // source: sso/sso.proto
 
-package sso1
+package ssov1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -697,7 +697,7 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0eUpdatePassword\x12\x1b.auth.UpdatePasswordRequest\x1a\n" +
 	".auth.User\x12?\n" +
 	"\n" +
-	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponseB\x15Z\x13BOBAvov.sso.v1;sso1b\x06proto3"
+	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponseB\x16Z\x14BOBAvov.sso.v1;ssov1b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
