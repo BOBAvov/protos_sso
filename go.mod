@@ -1,4 +1,4 @@
-module protos
+module github.com/BOBAvov/protos_sso
 
 go 1.25.0
 
