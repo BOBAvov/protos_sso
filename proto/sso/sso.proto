@@ -27,6 +27,7 @@ message RegisterResponse {
 message LoginRequest {
   string login = 1;      // уникальный логин пользователя
   string password = 2;   // пароль пользователя
+  int32 app_id = 3;      // Id сервиса в который надо залогиниться
 }
 
 message LoginResponse {
