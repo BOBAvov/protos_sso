@@ -384,10 +384,9 @@ type User struct {
 	Login         string                 `protobuf:"bytes,2,opt,name=login,proto3" json:"login,omitempty"`                       // уникальный логин пользователя
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`                       // просто существует
 	FullName      string                 `protobuf:"bytes,4,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"` // имя пользователя
-	Password      string                 `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`                 // пароль пользователя
-	IsAdmin       bool                   `protobuf:"varint,6,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`   // является ли пользователь админом
-	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"` // дата регистрации пользователя
-	UpdateAt      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=update_at,json=updateAt,proto3" json:"update_at,omitempty"` // дата последнего изменения данных пользователя
+	IsAdmin       bool                   `protobuf:"varint,5,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`   // является ли пользователь админом
+	CreateAt      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=create_at,json=createAt,proto3" json:"create_at,omitempty"` // дата регистрации пользователя
+	UpdateAt      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=update_at,json=updateAt,proto3" json:"update_at,omitempty"` // дата последнего изменения данных пользователя
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -446,13 +445,6 @@ func (x *User) GetEmail() string {
 func (x *User) GetFullName() string {
 	if x != nil {
 		return x.FullName
-	}
-	return ""
-}
-
-func (x *User) GetPassword() string {
-	if x != nil {
-		return x.Password
 	}
 	return ""
 }
@@ -678,16 +670,15 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0fIsAdminResponse\x12\x19\n" +
 	"\bis_admin\x18\x01 \x01(\bR\aisAdmin\"*\n" +
 	"\x0fUserInfoRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x91\x02\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xf5\x01\n" +
 	"\x04User\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
 	"\x05login\x18\x02 \x01(\tR\x05login\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1b\n" +
-	"\tfull_name\x18\x04 \x01(\tR\bfullName\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x19\n" +
-	"\bis_admin\x18\x06 \x01(\bR\aisAdmin\x127\n" +
-	"\tcreate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x127\n" +
-	"\tupdate_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\bupdateAt\")\n" +
+	"\tfull_name\x18\x04 \x01(\tR\bfullName\x12\x19\n" +
+	"\bis_admin\x18\x05 \x01(\bR\aisAdmin\x127\n" +
+	"\tcreate_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\bcreateAt\x127\n" +
+	"\tupdate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bupdateAt\")\n" +
 	"\x05Users\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
 	".auth.UserR\x05users\"0\n" +

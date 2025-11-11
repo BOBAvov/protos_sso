@@ -50,10 +50,9 @@ message User {
   string login = 2;                              // уникальный логин пользователя
   string email = 3;                              // просто существует
   string full_name = 4;                          // имя пользователя
-  string password = 5;                           // пароль пользователя
-  bool is_admin = 6;                             // является ли пользователь админом
-  google.protobuf.Timestamp create_at = 7;       // дата регистрации пользователя
-  google.protobuf.Timestamp update_at = 8;       // дата последнего изменения данных пользователя
+  bool is_admin = 5;                             // является ли пользователь админом
+  google.protobuf.Timestamp create_at = 6;       // дата регистрации пользователя
+  google.protobuf.Timestamp update_at = 7;       // дата последнего изменения данных пользователя
 }
 
 message Users {
