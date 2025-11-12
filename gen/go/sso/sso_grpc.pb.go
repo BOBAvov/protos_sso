@@ -25,6 +25,8 @@ const (
 	Auth_UserInfo_FullMethodName       = "/auth.Auth/UserInfo"
 	Auth_UpdatePassword_FullMethodName = "/auth.Auth/UpdatePassword"
 	Auth_RemoveUser_FullMethodName     = "/auth.Auth/RemoveUser"
+	Auth_UsersInfo_FullMethodName      = "/auth.Auth/UsersInfo"
+	Auth_UpdateToken_FullMethodName    = "/auth.Auth/UpdateToken"
 )
 
 // AuthClient is the client API for Auth service.
@@ -37,6 +39,8 @@ type AuthClient interface {
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*User, error)
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*User, error)
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
+	UsersInfo(ctx context.Context, in *UsersInfoRequest, opts ...grpc.CallOption) (*Users, error)
+	UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
 }
 
 type authClient struct {
@@ -107,6 +111,26 @@ func (c *authClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts
 	return out, nil
 }
 
+func (c *authClient) UsersInfo(ctx context.Context, in *UsersInfoRequest, opts ...grpc.CallOption) (*Users, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Users)
+	err := c.cc.Invoke(ctx, Auth_UsersInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTokenResponse)
+	err := c.cc.Invoke(ctx, Auth_UpdateToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServer is the server API for Auth service.
 // All implementations must embed UnimplementedAuthServer
 // for forward compatibility.
@@ -117,6 +141,8 @@ type AuthServer interface {
 	UserInfo(context.Context, *UserInfoRequest) (*User, error)
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*User, error)
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
+	UsersInfo(context.Context, *UsersInfoRequest) (*Users, error)
+	UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -144,6 +170,12 @@ func (UnimplementedAuthServer) UpdatePassword(context.Context, *UpdatePasswordRe
 }
 func (UnimplementedAuthServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
+}
+func (UnimplementedAuthServer) UsersInfo(context.Context, *UsersInfoRequest) (*Users, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UsersInfo not implemented")
+}
+func (UnimplementedAuthServer) UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateToken not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -274,6 +306,42 @@ func _Auth_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Auth_UsersInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UsersInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).UsersInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_UsersInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).UsersInfo(ctx, req.(*UsersInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).UpdateToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_UpdateToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).UpdateToken(ctx, req.(*UpdateTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Auth_ServiceDesc is the grpc.ServiceDesc for Auth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -304,6 +372,14 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveUser",
 			Handler:    _Auth_RemoveUser_Handler,
+		},
+		{
+			MethodName: "UsersInfo",
+			Handler:    _Auth_UsersInfo_Handler,
+		},
+		{
+			MethodName: "UpdateToken",
+			Handler:    _Auth_UpdateToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -197,7 +197,6 @@ func (x *LoginRequest) GetAppId() int32 {
 type LoginResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"` // jwt токен
-	Exp           *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=exp,proto3" json:"exp,omitempty"`     // время когда токен истекает
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -237,13 +236,6 @@ func (x *LoginResponse) GetToken() string {
 		return x.Token
 	}
 	return ""
-}
-
-func (x *LoginResponse) GetExp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Exp
-	}
-	return nil
 }
 
 type IsAdminRequest struct {
@@ -516,7 +508,8 @@ func (x *Users) GetUsers() []*User {
 
 type UpdatePasswordRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // уникальный id пользователя
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`               // уникальный id пользователя
+	NewPassword   string                 `protobuf:"bytes,2,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"` // новый пароль
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -556,6 +549,13 @@ func (x *UpdatePasswordRequest) GetUserId() int64 {
 		return x.UserId
 	}
 	return 0
+}
+
+func (x *UpdatePasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
 }
 
 type RemoveUserRequest struct {
@@ -646,6 +646,130 @@ func (x *RemoveUserResponse) GetMessage() string {
 	return ""
 }
 
+type UsersInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UsersInfoRequest) Reset() {
+	*x = UsersInfoRequest{}
+	mi := &file_sso_sso_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UsersInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsersInfoRequest) ProtoMessage() {}
+
+func (x *UsersInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsersInfoRequest.ProtoReflect.Descriptor instead.
+func (*UsersInfoRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{12}
+}
+
+type UpdateTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTokenRequest) Reset() {
+	*x = UpdateTokenRequest{}
+	mi := &file_sso_sso_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTokenRequest) ProtoMessage() {}
+
+func (x *UpdateTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTokenRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTokenRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *UpdateTokenRequest) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+type UpdateTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTokenResponse) Reset() {
+	*x = UpdateTokenResponse{}
+	mi := &file_sso_sso_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTokenResponse) ProtoMessage() {}
+
+func (x *UpdateTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTokenResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTokenResponse) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *UpdateTokenResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
 var File_sso_sso_proto protoreflect.FileDescriptor
 
 const file_sso_sso_proto_rawDesc = "" +
@@ -661,10 +785,9 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\fLoginRequest\x12\x14\n" +
 	"\x05login\x18\x01 \x01(\tR\x05login\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x15\n" +
-	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"S\n" +
+	"\x06app_id\x18\x03 \x01(\x05R\x05appId\"%\n" +
 	"\rLoginResponse\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12,\n" +
-	"\x03exp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x03exp\")\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\")\n" +
 	"\x0eIsAdminRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\",\n" +
 	"\x0fIsAdminResponse\x12\x19\n" +
@@ -681,13 +804,19 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\tupdate_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\bupdateAt\")\n" +
 	"\x05Users\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
-	".auth.UserR\x05users\"0\n" +
+	".auth.UserR\x05users\"S\n" +
 	"\x15UpdatePasswordRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\",\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12!\n" +
+	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\",\n" +
 	"\x11RemoveUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\".\n" +
 	"\x12RemoveUserResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\xd6\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x12\n" +
+	"\x10UsersInfoRequest\"*\n" +
+	"\x12UpdateTokenRequest\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"+\n" +
+	"\x13UpdateTokenResponse\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token2\xcc\x03\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
@@ -697,7 +826,9 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0eUpdatePassword\x12\x1b.auth.UpdatePasswordRequest\x1a\n" +
 	".auth.User\x12?\n" +
 	"\n" +
-	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponseB\x16Z\x14BOBAvov.sso.v1;ssov1b\x06proto3"
+	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponse\x120\n" +
+	"\tUsersInfo\x12\x16.auth.UsersInfoRequest\x1a\v.auth.Users\x12B\n" +
+	"\vUpdateToken\x12\x18.auth.UpdateTokenRequest\x1a\x19.auth.UpdateTokenResponseB\x16Z\x14BOBAvov.sso.v1;ssov1b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
@@ -711,7 +842,7 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),       // 0: auth.RegisterRequest
 	(*RegisterResponse)(nil),      // 1: auth.RegisterResponse
@@ -725,30 +856,36 @@ var file_sso_sso_proto_goTypes = []any{
 	(*UpdatePasswordRequest)(nil), // 9: auth.UpdatePasswordRequest
 	(*RemoveUserRequest)(nil),     // 10: auth.RemoveUserRequest
 	(*RemoveUserResponse)(nil),    // 11: auth.RemoveUserResponse
-	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(*UsersInfoRequest)(nil),      // 12: auth.UsersInfoRequest
+	(*UpdateTokenRequest)(nil),    // 13: auth.UpdateTokenRequest
+	(*UpdateTokenResponse)(nil),   // 14: auth.UpdateTokenResponse
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	12, // 0: auth.LoginResponse.exp:type_name -> google.protobuf.Timestamp
-	12, // 1: auth.User.create_at:type_name -> google.protobuf.Timestamp
-	12, // 2: auth.User.update_at:type_name -> google.protobuf.Timestamp
-	7,  // 3: auth.Users.users:type_name -> auth.User
-	0,  // 4: auth.Auth.Register:input_type -> auth.RegisterRequest
-	2,  // 5: auth.Auth.Login:input_type -> auth.LoginRequest
-	4,  // 6: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
-	6,  // 7: auth.Auth.UserInfo:input_type -> auth.UserInfoRequest
-	9,  // 8: auth.Auth.UpdatePassword:input_type -> auth.UpdatePasswordRequest
-	10, // 9: auth.Auth.RemoveUser:input_type -> auth.RemoveUserRequest
-	1,  // 10: auth.Auth.Register:output_type -> auth.RegisterResponse
-	3,  // 11: auth.Auth.Login:output_type -> auth.LoginResponse
-	5,  // 12: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
-	7,  // 13: auth.Auth.UserInfo:output_type -> auth.User
-	7,  // 14: auth.Auth.UpdatePassword:output_type -> auth.User
-	11, // 15: auth.Auth.RemoveUser:output_type -> auth.RemoveUserResponse
-	10, // [10:16] is the sub-list for method output_type
-	4,  // [4:10] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	15, // 0: auth.User.create_at:type_name -> google.protobuf.Timestamp
+	15, // 1: auth.User.update_at:type_name -> google.protobuf.Timestamp
+	7,  // 2: auth.Users.users:type_name -> auth.User
+	0,  // 3: auth.Auth.Register:input_type -> auth.RegisterRequest
+	2,  // 4: auth.Auth.Login:input_type -> auth.LoginRequest
+	4,  // 5: auth.Auth.IsAdmin:input_type -> auth.IsAdminRequest
+	6,  // 6: auth.Auth.UserInfo:input_type -> auth.UserInfoRequest
+	9,  // 7: auth.Auth.UpdatePassword:input_type -> auth.UpdatePasswordRequest
+	10, // 8: auth.Auth.RemoveUser:input_type -> auth.RemoveUserRequest
+	12, // 9: auth.Auth.UsersInfo:input_type -> auth.UsersInfoRequest
+	13, // 10: auth.Auth.UpdateToken:input_type -> auth.UpdateTokenRequest
+	1,  // 11: auth.Auth.Register:output_type -> auth.RegisterResponse
+	3,  // 12: auth.Auth.Login:output_type -> auth.LoginResponse
+	5,  // 13: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
+	7,  // 14: auth.Auth.UserInfo:output_type -> auth.User
+	7,  // 15: auth.Auth.UpdatePassword:output_type -> auth.User
+	11, // 16: auth.Auth.RemoveUser:output_type -> auth.RemoveUserResponse
+	8,  // 17: auth.Auth.UsersInfo:output_type -> auth.Users
+	14, // 18: auth.Auth.UpdateToken:output_type -> auth.UpdateTokenResponse
+	11, // [11:19] is the sub-list for method output_type
+	3,  // [3:11] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_sso_sso_proto_init() }
@@ -762,7 +899,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

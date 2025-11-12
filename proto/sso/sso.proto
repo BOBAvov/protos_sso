@@ -5,12 +5,14 @@ package auth;
 option go_package = "BOBAvov.sso.v1;ssov1";
 
 service Auth {
-  rpc Register(RegisterRequest) returns (RegisterResponse);       // регистрация пользователя
-  rpc Login(LoginRequest) returns (LoginResponse);                // авторизация пользователя с получение jwt токена
-  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);          // проверка является ли пользователь админом
-  rpc UserInfo(UserInfoRequest) returns (User);                   // получение информации о пользователе по его id
-  rpc UpdatePassword(UpdatePasswordRequest) returns (User);       // обновление пароля
-  rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse); // удаление пользователя
+  rpc Register(RegisterRequest) returns (RegisterResponse);              // регистрация пользователя
+  rpc Login(LoginRequest) returns (LoginResponse);                       // авторизация пользователя с получение jwt токена
+  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);                 // проверка является ли пользователь админом
+  rpc UserInfo(UserInfoRequest) returns (User);                          // получение информации о пользователе по его id
+  rpc UpdatePassword(UpdatePasswordRequest) returns (User);              // обновление пароля
+  rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);        // удаление пользователя
+  rpc UsersInfo(UsersInfoRequest) returns (Users);                       // получение информации о всех пользователях
+  rpc UpdateToken(UpdateTokenRequest) returns (UpdateTokenResponse);     // обмен старого токена на новый
 }
 
 message RegisterRequest {
@@ -31,19 +33,18 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string token = 1;                   // jwt токен
-  google.protobuf.Timestamp exp = 2;  // время когда токен истекает
+  string token = 1;                               // jwt токен
 }
 
 message IsAdminRequest {
-  int64 user_id = 1;                 // уникальный id пользователя
+  int64 user_id = 1;                              // уникальный id пользователя
 }
 message IsAdminResponse {
-  bool is_admin = 1;        // уникальный id пользователя
+  bool is_admin = 1;                             // уникальный id пользователя
 }
 
 message UserInfoRequest {
-  int64 user_id = 1;       // уникальный id пользователя
+  int64 user_id = 1;                             // уникальный id пользователя
 }
 message User {
   int64 user_id = 1;                             // уникальный id пользователя
@@ -61,6 +62,7 @@ message Users {
 
 message UpdatePasswordRequest {
   int64 user_id = 1;                              // уникальный id пользователя
+  string new_password = 2;                        // новый пароль
 }
 
 message RemoveUserRequest {
@@ -69,4 +71,14 @@ message RemoveUserRequest {
 
 message RemoveUserResponse {
   string message = 1;                           // сообщение об операции
+}
+
+message UsersInfoRequest {}
+
+message UpdateTokenRequest {
+  string token = 1;
+}
+
+message UpdateTokenResponse {
+  string token = 1;
 }
