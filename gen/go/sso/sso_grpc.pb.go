@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -27,6 +28,7 @@ const (
 	Auth_RemoveUser_FullMethodName     = "/auth.Auth/RemoveUser"
 	Auth_UsersInfo_FullMethodName      = "/auth.Auth/UsersInfo"
 	Auth_UpdateToken_FullMethodName    = "/auth.Auth/UpdateToken"
+	Auth_Ping_FullMethodName           = "/auth.Auth/Ping"
 )
 
 // AuthClient is the client API for Auth service.
@@ -37,10 +39,11 @@ type AuthClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*User, error)
-	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*User, error)
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
-	UsersInfo(ctx context.Context, in *UsersInfoRequest, opts ...grpc.CallOption) (*Users, error)
-	UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
+	UsersInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Users, error)
+	UpdateToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
+	Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type authClient struct {
@@ -91,9 +94,9 @@ func (c *authClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...
 	return out, nil
 }
 
-func (c *authClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*User, error) {
+func (c *authClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(User)
+	out := new(UpdateTokenResponse)
 	err := c.cc.Invoke(ctx, Auth_UpdatePassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -111,7 +114,7 @@ func (c *authClient) RemoveUser(ctx context.Context, in *RemoveUserRequest, opts
 	return out, nil
 }
 
-func (c *authClient) UsersInfo(ctx context.Context, in *UsersInfoRequest, opts ...grpc.CallOption) (*Users, error) {
+func (c *authClient) UsersInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Users, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Users)
 	err := c.cc.Invoke(ctx, Auth_UsersInfo_FullMethodName, in, out, cOpts...)
@@ -121,10 +124,20 @@ func (c *authClient) UsersInfo(ctx context.Context, in *UsersInfoRequest, opts .
 	return out, nil
 }
 
-func (c *authClient) UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
+func (c *authClient) UpdateToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateTokenResponse)
 	err := c.cc.Invoke(ctx, Auth_UpdateToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Auth_Ping_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -139,10 +152,11 @@ type AuthServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	UserInfo(context.Context, *UserInfoRequest) (*User, error)
-	UpdatePassword(context.Context, *UpdatePasswordRequest) (*User, error)
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdateTokenResponse, error)
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
-	UsersInfo(context.Context, *UsersInfoRequest) (*Users, error)
-	UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error)
+	UsersInfo(context.Context, *emptypb.Empty) (*Users, error)
+	UpdateToken(context.Context, *emptypb.Empty) (*UpdateTokenResponse, error)
+	Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -165,17 +179,20 @@ func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdm
 func (UnimplementedAuthServer) UserInfo(context.Context, *UserInfoRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
 }
-func (UnimplementedAuthServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*User, error) {
+func (UnimplementedAuthServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdateTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedAuthServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveUser not implemented")
 }
-func (UnimplementedAuthServer) UsersInfo(context.Context, *UsersInfoRequest) (*Users, error) {
+func (UnimplementedAuthServer) UsersInfo(context.Context, *emptypb.Empty) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UsersInfo not implemented")
 }
-func (UnimplementedAuthServer) UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error) {
+func (UnimplementedAuthServer) UpdateToken(context.Context, *emptypb.Empty) (*UpdateTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateToken not implemented")
+}
+func (UnimplementedAuthServer) Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 func (UnimplementedAuthServer) testEmbeddedByValue()              {}
@@ -307,7 +324,7 @@ func _Auth_RemoveUser_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _Auth_UsersInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UsersInfoRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -319,13 +336,13 @@ func _Auth_UsersInfo_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: Auth_UsersInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).UsersInfo(ctx, req.(*UsersInfoRequest))
+		return srv.(AuthServer).UsersInfo(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Auth_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTokenRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -337,7 +354,25 @@ func _Auth_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: Auth_UpdateToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).UpdateToken(ctx, req.(*UpdateTokenRequest))
+		return srv.(AuthServer).UpdateToken(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_Ping_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).Ping(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -380,6 +415,10 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateToken",
 			Handler:    _Auth_UpdateToken_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _Auth_Ping_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
