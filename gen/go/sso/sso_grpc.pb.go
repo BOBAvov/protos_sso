@@ -39,7 +39,7 @@ type AuthClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*User, error)
-	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
 	UsersInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Users, error)
 	UpdateToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
@@ -94,9 +94,9 @@ func (c *authClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...
 	return out, nil
 }
 
-func (c *authClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
+func (c *authClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateTokenResponse)
+	out := new(UpdatePasswordResponse)
 	err := c.cc.Invoke(ctx, Auth_UpdatePassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ type AuthServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	UserInfo(context.Context, *UserInfoRequest) (*User, error)
-	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdateTokenResponse, error)
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
 	UsersInfo(context.Context, *emptypb.Empty) (*Users, error)
 	UpdateToken(context.Context, *emptypb.Empty) (*UpdateTokenResponse, error)
@@ -179,7 +179,7 @@ func (UnimplementedAuthServer) IsAdmin(context.Context, *IsAdminRequest) (*IsAdm
 func (UnimplementedAuthServer) UserInfo(context.Context, *UserInfoRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
 }
-func (UnimplementedAuthServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdateTokenResponse, error) {
+func (UnimplementedAuthServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedAuthServer) RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error) {

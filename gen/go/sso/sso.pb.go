@@ -780,14 +780,14 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x13UpdateTokenResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"2\n" +
 	"\x16UpdatePasswordResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\x91\x04\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\x94\x04\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x12-\n" +
 	"\bUserInfo\x12\x15.auth.UserInfoRequest\x1a\n" +
-	".auth.User\x12H\n" +
-	"\x0eUpdatePassword\x12\x1b.auth.UpdatePasswordRequest\x1a\x19.auth.UpdateTokenResponse\x12?\n" +
+	".auth.User\x12K\n" +
+	"\x0eUpdatePassword\x12\x1b.auth.UpdatePasswordRequest\x1a\x1c.auth.UpdatePasswordResponse\x12?\n" +
 	"\n" +
 	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponse\x120\n" +
 	"\tUsersInfo\x12\x16.google.protobuf.Empty\x1a\v.auth.Users\x12@\n" +
@@ -842,7 +842,7 @@ var file_sso_sso_proto_depIdxs = []int32{
 	3,  // 13: auth.Auth.Login:output_type -> auth.LoginResponse
 	5,  // 14: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
 	7,  // 15: auth.Auth.UserInfo:output_type -> auth.User
-	12, // 16: auth.Auth.UpdatePassword:output_type -> auth.UpdateTokenResponse
+	13, // 16: auth.Auth.UpdatePassword:output_type -> auth.UpdatePasswordResponse
 	11, // 17: auth.Auth.RemoveUser:output_type -> auth.RemoveUserResponse
 	8,  // 18: auth.Auth.UsersInfo:output_type -> auth.Users
 	12, // 19: auth.Auth.UpdateToken:output_type -> auth.UpdateTokenResponse

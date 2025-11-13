@@ -6,15 +6,15 @@ package auth;
 option go_package = "BOBAvov.sso.v1;ssov1";
 
 service Auth {
-  rpc Register(RegisterRequest) returns (RegisterResponse);                  // регистрация пользователя
-  rpc Login(LoginRequest) returns (LoginResponse);                           // авторизация пользователя с получение jwt токена
-  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);                     // проверка является ли пользователь админом
-  rpc UserInfo(UserInfoRequest) returns (User);                              // получение информации о пользователе по его id
-  rpc UpdatePassword(UpdatePasswordRequest) returns (UpdateTokenResponse);   // обновление пароля
-  rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);            // удаление пользователя
-  rpc UsersInfo(google.protobuf.Empty) returns (Users);                      // получение информации о всех пользователях
-  rpc UpdateToken(google.protobuf.Empty) returns (UpdateTokenResponse);      // обмен старого токена на новый
-  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);           // проверка доступности сервиса
+  rpc Register(RegisterRequest) returns (RegisterResponse);                     // регистрация пользователя
+  rpc Login(LoginRequest) returns (LoginResponse);                              // авторизация пользователя с получение jwt токена
+  rpc IsAdmin(IsAdminRequest) returns (IsAdminResponse);                        // проверка является ли пользователь админом
+  rpc UserInfo(UserInfoRequest) returns (User);                                 // получение информации о пользователе по его id
+  rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);   // обновление пароля
+  rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);               // удаление пользователя
+  rpc UsersInfo(google.protobuf.Empty) returns (Users);                         // получение информации о всех пользователях
+  rpc UpdateToken(google.protobuf.Empty) returns (UpdateTokenResponse);         // обмен старого токена на новый
+  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);              // проверка доступности сервиса
 }
 
 message RegisterRequest {
