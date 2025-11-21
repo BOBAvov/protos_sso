@@ -647,6 +647,50 @@ func (x *RemoveUserResponse) GetMessage() string {
 	return ""
 }
 
+type UpdateTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AppId         int32                  `protobuf:"varint,1,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"` // а так вообще-то лучше
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateTokenRequest) Reset() {
+	*x = UpdateTokenRequest{}
+	mi := &file_sso_sso_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTokenRequest) ProtoMessage() {}
+
+func (x *UpdateTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTokenRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTokenRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *UpdateTokenRequest) GetAppId() int32 {
+	if x != nil {
+		return x.AppId
+	}
+	return 0
+}
+
 type UpdateTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"` // новый jwt токен
@@ -656,7 +700,7 @@ type UpdateTokenResponse struct {
 
 func (x *UpdateTokenResponse) Reset() {
 	*x = UpdateTokenResponse{}
-	mi := &file_sso_sso_proto_msgTypes[12]
+	mi := &file_sso_sso_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -668,7 +712,7 @@ func (x *UpdateTokenResponse) String() string {
 func (*UpdateTokenResponse) ProtoMessage() {}
 
 func (x *UpdateTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[12]
+	mi := &file_sso_sso_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -681,7 +725,7 @@ func (x *UpdateTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTokenResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTokenResponse) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{12}
+	return file_sso_sso_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateTokenResponse) GetToken() string {
@@ -700,7 +744,7 @@ type UpdatePasswordResponse struct {
 
 func (x *UpdatePasswordResponse) Reset() {
 	*x = UpdatePasswordResponse{}
-	mi := &file_sso_sso_proto_msgTypes[13]
+	mi := &file_sso_sso_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -712,7 +756,7 @@ func (x *UpdatePasswordResponse) String() string {
 func (*UpdatePasswordResponse) ProtoMessage() {}
 
 func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[13]
+	mi := &file_sso_sso_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -725,7 +769,7 @@ func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePasswordResponse.ProtoReflect.Descriptor instead.
 func (*UpdatePasswordResponse) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{13}
+	return file_sso_sso_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UpdatePasswordResponse) GetMessage() string {
@@ -777,6 +821,8 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\".\n" +
 	"\x12RemoveUserResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"+\n" +
+	"\x12UpdateTokenRequest\x12\x15\n" +
+	"\x06app_id\x18\x01 \x01(\x05R\x05appId\"+\n" +
 	"\x13UpdateTokenResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"2\n" +
 	"\x16UpdatePasswordResponse\x12\x18\n" +
@@ -806,7 +852,7 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),        // 0: auth.RegisterRequest
 	(*RegisterResponse)(nil),       // 1: auth.RegisterResponse
@@ -820,14 +866,15 @@ var file_sso_sso_proto_goTypes = []any{
 	(*UpdatePasswordRequest)(nil),  // 9: auth.UpdatePasswordRequest
 	(*RemoveUserRequest)(nil),      // 10: auth.RemoveUserRequest
 	(*RemoveUserResponse)(nil),     // 11: auth.RemoveUserResponse
-	(*UpdateTokenResponse)(nil),    // 12: auth.UpdateTokenResponse
-	(*UpdatePasswordResponse)(nil), // 13: auth.UpdatePasswordResponse
-	(*timestamppb.Timestamp)(nil),  // 14: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),          // 15: google.protobuf.Empty
+	(*UpdateTokenRequest)(nil),     // 12: auth.UpdateTokenRequest
+	(*UpdateTokenResponse)(nil),    // 13: auth.UpdateTokenResponse
+	(*UpdatePasswordResponse)(nil), // 14: auth.UpdatePasswordResponse
+	(*timestamppb.Timestamp)(nil),  // 15: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),          // 16: google.protobuf.Empty
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	14, // 0: auth.User.create_at:type_name -> google.protobuf.Timestamp
-	14, // 1: auth.User.update_at:type_name -> google.protobuf.Timestamp
+	15, // 0: auth.User.create_at:type_name -> google.protobuf.Timestamp
+	15, // 1: auth.User.update_at:type_name -> google.protobuf.Timestamp
 	7,  // 2: auth.Users.users:type_name -> auth.User
 	0,  // 3: auth.Auth.Register:input_type -> auth.RegisterRequest
 	2,  // 4: auth.Auth.Login:input_type -> auth.LoginRequest
@@ -835,18 +882,18 @@ var file_sso_sso_proto_depIdxs = []int32{
 	6,  // 6: auth.Auth.UserInfo:input_type -> auth.UserInfoRequest
 	9,  // 7: auth.Auth.UpdatePassword:input_type -> auth.UpdatePasswordRequest
 	10, // 8: auth.Auth.RemoveUser:input_type -> auth.RemoveUserRequest
-	15, // 9: auth.Auth.UsersInfo:input_type -> google.protobuf.Empty
-	15, // 10: auth.Auth.UpdateToken:input_type -> google.protobuf.Empty
-	15, // 11: auth.Auth.Ping:input_type -> google.protobuf.Empty
+	16, // 9: auth.Auth.UsersInfo:input_type -> google.protobuf.Empty
+	16, // 10: auth.Auth.UpdateToken:input_type -> google.protobuf.Empty
+	16, // 11: auth.Auth.Ping:input_type -> google.protobuf.Empty
 	1,  // 12: auth.Auth.Register:output_type -> auth.RegisterResponse
 	3,  // 13: auth.Auth.Login:output_type -> auth.LoginResponse
 	5,  // 14: auth.Auth.IsAdmin:output_type -> auth.IsAdminResponse
 	7,  // 15: auth.Auth.UserInfo:output_type -> auth.User
-	13, // 16: auth.Auth.UpdatePassword:output_type -> auth.UpdatePasswordResponse
+	14, // 16: auth.Auth.UpdatePassword:output_type -> auth.UpdatePasswordResponse
 	11, // 17: auth.Auth.RemoveUser:output_type -> auth.RemoveUserResponse
 	8,  // 18: auth.Auth.UsersInfo:output_type -> auth.Users
-	12, // 19: auth.Auth.UpdateToken:output_type -> auth.UpdateTokenResponse
-	15, // 20: auth.Auth.Ping:output_type -> google.protobuf.Empty
+	13, // 19: auth.Auth.UpdateToken:output_type -> auth.UpdateTokenResponse
+	16, // 20: auth.Auth.Ping:output_type -> google.protobuf.Empty
 	12, // [12:21] is the sub-list for method output_type
 	3,  // [3:12] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
@@ -865,7 +912,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

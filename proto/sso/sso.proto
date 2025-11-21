@@ -75,6 +75,9 @@ message RemoveUserResponse {
   string message = 1;                           // сообщение об операции
 }
 
+message UpdateTokenRequest {
+  int32 app_id = 1;                             // а так вообще-то лучше
+}
 
 message UpdateTokenResponse {
   string token = 1;                              // новый jwt токен
