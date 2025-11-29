@@ -13,7 +13,7 @@ service Auth {
   rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);   // обновление пароля
   rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);               // удаление пользователя
   rpc UsersInfo(google.protobuf.Empty) returns (Users);                         // получение информации о всех пользователях
-  rpc UpdateToken(google.protobuf.Empty) returns (UpdateTokenResponse);         // обмен старого токена на новый
+  rpc UpdateToken(UpdateTokenRequest) returns (UpdateTokenResponse);         // обмен старого токена на новый
   rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);              // проверка доступности сервиса
 }
 

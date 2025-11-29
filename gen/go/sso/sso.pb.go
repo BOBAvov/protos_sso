@@ -826,7 +826,7 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x13UpdateTokenResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"2\n" +
 	"\x16UpdatePasswordResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\x94\x04\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\x96\x04\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x126\n" +
@@ -836,8 +836,8 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0eUpdatePassword\x12\x1b.auth.UpdatePasswordRequest\x1a\x1c.auth.UpdatePasswordResponse\x12?\n" +
 	"\n" +
 	"RemoveUser\x12\x17.auth.RemoveUserRequest\x1a\x18.auth.RemoveUserResponse\x120\n" +
-	"\tUsersInfo\x12\x16.google.protobuf.Empty\x1a\v.auth.Users\x12@\n" +
-	"\vUpdateToken\x12\x16.google.protobuf.Empty\x1a\x19.auth.UpdateTokenResponse\x126\n" +
+	"\tUsersInfo\x12\x16.google.protobuf.Empty\x1a\v.auth.Users\x12B\n" +
+	"\vUpdateToken\x12\x18.auth.UpdateTokenRequest\x1a\x19.auth.UpdateTokenResponse\x126\n" +
 	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB\x16Z\x14BOBAvov.sso.v1;ssov1b\x06proto3"
 
 var (
@@ -883,7 +883,7 @@ var file_sso_sso_proto_depIdxs = []int32{
 	9,  // 7: auth.Auth.UpdatePassword:input_type -> auth.UpdatePasswordRequest
 	10, // 8: auth.Auth.RemoveUser:input_type -> auth.RemoveUserRequest
 	16, // 9: auth.Auth.UsersInfo:input_type -> google.protobuf.Empty
-	16, // 10: auth.Auth.UpdateToken:input_type -> google.protobuf.Empty
+	12, // 10: auth.Auth.UpdateToken:input_type -> auth.UpdateTokenRequest
 	16, // 11: auth.Auth.Ping:input_type -> google.protobuf.Empty
 	1,  // 12: auth.Auth.Register:output_type -> auth.RegisterResponse
 	3,  // 13: auth.Auth.Login:output_type -> auth.LoginResponse

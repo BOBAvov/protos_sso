@@ -42,7 +42,7 @@ type AuthClient interface {
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
 	RemoveUser(ctx context.Context, in *RemoveUserRequest, opts ...grpc.CallOption) (*RemoveUserResponse, error)
 	UsersInfo(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Users, error)
-	UpdateToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
+	UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error)
 	Ping(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -124,7 +124,7 @@ func (c *authClient) UsersInfo(ctx context.Context, in *emptypb.Empty, opts ...g
 	return out, nil
 }
 
-func (c *authClient) UpdateToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
+func (c *authClient) UpdateToken(ctx context.Context, in *UpdateTokenRequest, opts ...grpc.CallOption) (*UpdateTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateTokenResponse)
 	err := c.cc.Invoke(ctx, Auth_UpdateToken_FullMethodName, in, out, cOpts...)
@@ -155,7 +155,7 @@ type AuthServer interface {
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
 	RemoveUser(context.Context, *RemoveUserRequest) (*RemoveUserResponse, error)
 	UsersInfo(context.Context, *emptypb.Empty) (*Users, error)
-	UpdateToken(context.Context, *emptypb.Empty) (*UpdateTokenResponse, error)
+	UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error)
 	Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAuthServer()
 }
@@ -188,7 +188,7 @@ func (UnimplementedAuthServer) RemoveUser(context.Context, *RemoveUserRequest) (
 func (UnimplementedAuthServer) UsersInfo(context.Context, *emptypb.Empty) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UsersInfo not implemented")
 }
-func (UnimplementedAuthServer) UpdateToken(context.Context, *emptypb.Empty) (*UpdateTokenResponse, error) {
+func (UnimplementedAuthServer) UpdateToken(context.Context, *UpdateTokenRequest) (*UpdateTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateToken not implemented")
 }
 func (UnimplementedAuthServer) Ping(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
@@ -342,7 +342,7 @@ func _Auth_UsersInfo_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 func _Auth_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(UpdateTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -354,7 +354,7 @@ func _Auth_UpdateToken_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: Auth_UpdateToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).UpdateToken(ctx, req.(*emptypb.Empty))
+		return srv.(AuthServer).UpdateToken(ctx, req.(*UpdateTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
